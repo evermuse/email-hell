@@ -1,49 +1,37 @@
 var fixEmail = (function() {
 
-  console.log(emailList);
+  var affected = {};
 
-  var affectedList = [];
-  var emailCount = 0;
-
-  debugger;
+  //debugger;
 
   for (var i = 0; i < emailList.emails.length; i++) {
 
-    var currentEmailObj = emailList.emails[i];
-    var nextEmailObj = emailList.emails[i + 1];
+    if (affected.hasOwnProperty(emailList.emails[i].email)) {
 
-    if ((currentEmailObj.email && currentEmailObj.sent) == (nextEmailObj.email && nextEmailObj.sent)) {
+      affected[ emailList.emails[i].email ]++;
 
-      for (var j = 0; j < affectedList.length; j++) {
+    } else if (!affected[ emailList.emails[i].email ]) {
 
-        if (affectedList[j.email] !== currentEmailObj.email) {
-
-          affectedList.push(currentEmailObj);
-          emailCount++;
-          emailCount = affectedList[j.count];
-          j++;
-
-        } else if (affectedList[j.email] === currentEmailObj.email) {
-
-          emailCount++;
-          emailCount = affectedList.count;
-          j++;
-
-        }
-
-      }
-
-    } else {
-
-      emailCount = 0;
+      affected[ emailList.emails[i].email ] = 1;
 
     }
 
-    console.log(affectedList);
+  }
+
+  for (var key in affected) {
+
+    // Number associated with key
+
+    if (affected[key] === 1) {
+
+    //remove key with 1
+
+    delete affected[key];
+
+    }
 
   }
 
-  // return affectedList; ??
   return fixEmail;
 
 })();
